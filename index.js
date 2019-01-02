@@ -34,7 +34,7 @@ function makePalindrome(input) {
 
         if (currentChar !== oppositeChar) {
             let leftIndex = Infinity;
-            let rightIndex = Infinity;
+            let rightIndex = -Infinity;
 
             for (const i = currentIndex + 1; i < oppositeIndex; i++) {
                 if (input[i] === oppositeChar) {
