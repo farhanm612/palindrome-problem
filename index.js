@@ -26,7 +26,7 @@ function makePalindrome(input) {
     if (oddCounts.length > 1) return -1;
 
     let cost = 0;
-    for (const currentIndex = 0; currentIndex < input.length / 2; currentIndex++) {
+    for (let currentIndex = 0; currentIndex < input.length / 2; currentIndex++) {
         const oppositeIndex = input.length - 1 - currentIndex;
 
         const currentChar = input[currentIndex];
@@ -36,14 +36,14 @@ function makePalindrome(input) {
             let leftIndex = Infinity;
             let rightIndex = -Infinity;
 
-            for (const i = currentIndex + 1; i < oppositeIndex; i++) {
+            for (let i = currentIndex + 1; i < oppositeIndex; i++) {
                 if (input[i] === oppositeChar) {
                     leftIndex = i;
                     break;
                 }
             }
 
-            for (const i = oppositeIndex - 1; i > currentIndex; i--) {
+            for (let i = oppositeIndex - 1; i > currentIndex; i--) {
                 if (input[i] === currentChar) {
                     rightIndex = i;
                     break;
@@ -55,31 +55,13 @@ function makePalindrome(input) {
 
             cost = cost + Math.min(leftDistance, rightDistance);
 
-
+            if (leftDistance < rightDistance) move(leftIndex, currentIndex);
+            else move(rightIndex, oppositeIndex);
         }
     }
 
     return cost;
 }
 
-// console.log(makePalindrome(input));
-let input = 'abcdefghj';
-
-function move(from, to) {
-    if (from < to) {
-        input =
-            input.substring(0, from) +
-            input.substring(from + 1, to + 1) +
-            input[from] +
-            input.substring(to + 1);
-    } else if (from > to) {
-        input =
-            input.substring(0, to) +
-            input[from] +
-            input.substring(to, from) +
-            input.substring(from + 1);
-    }
-}
-
-move(4, 0);
-console.log(input);
+const input = 'yee';
+console.log(makePalindrome(input));
