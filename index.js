@@ -1,6 +1,20 @@
-const input = 'aeeyeey';
-
 function makePalindrome(input) {
+    function move(from, to) {
+        if (from < to) {
+            input =
+                input.substring(0, from) +
+                input.substring(from + 1, to + 1) +
+                input[from] +
+                input.substring(to + 2);
+        } else if (from > to) {
+            input =
+                input.substring(0, to) +
+                input[from] +
+                input.substring(to, from) +
+                input.substring(from + 1);
+        }
+    }
+
     const charCounts = {};
 
     for (const c of input) {
@@ -20,7 +34,7 @@ function makePalindrome(input) {
 
         if (currentChar !== oppositeChar) {
             let leftIndex = Infinity;
-            let rightIndex = -Infinity;
+            let rightIndex = Infinity;
 
             for (const i = currentIndex + 1; i < oppositeIndex; i++) {
                 if (input[i] === oppositeChar) {
@@ -35,8 +49,37 @@ function makePalindrome(input) {
                     break;
                 }
             }
+
+            const leftDistance = leftIndex - currentIndex;
+            const rightDistance = oppositeIndex - rightIndex;
+
+            cost = cost + Math.min(leftDistance, rightDistance);
+
+
         }
+    }
+
+    return cost;
+}
+
+// console.log(makePalindrome(input));
+let input = 'abcdefghj';
+
+function move(from, to) {
+    if (from < to) {
+        input =
+            input.substring(0, from) +
+            input.substring(from + 1, to + 1) +
+            input[from] +
+            input.substring(to + 1);
+    } else if (from > to) {
+        input =
+            input.substring(0, to) +
+            input[from] +
+            input.substring(to, from) +
+            input.substring(from + 1);
     }
 }
 
-console.log(makePalindrome(input));
+move(4, 0);
+console.log(input);
